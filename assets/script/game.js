@@ -52,6 +52,7 @@ cc.Class({
           var bgNum = Math.floor(Math.random() * 10);
           this.bg.spriteFrame = this.bgImg[bgNum];
           this.bgBeautifyShow(bgNum);
+          cc.log(bgNum)
           break;
         case "skin":
           cc.log(str)

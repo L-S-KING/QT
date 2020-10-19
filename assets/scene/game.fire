@@ -180,7 +180,7 @@
       "array": [
         0,
         0,
-        589.6512427728237,
+        589.8755145147377,
         0,
         0,
         0,
@@ -359,7 +359,7 @@
         "__id__": 15
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [],
     "_prefab": null,
     "_opacity": 255,
@@ -1464,7 +1464,7 @@
         "__id__": 35
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [],
     "_prefab": null,
     "_opacity": 255,
@@ -1522,7 +1522,7 @@
       "__id__": 28
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 30
