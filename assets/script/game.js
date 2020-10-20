@@ -13,27 +13,53 @@ cc.Class({
         default: null,
         type: cc.Sprite
       },
+      //背景图片数组
       bgImg : {
         default: [],
         type: [cc.SpriteFrame]
       },
+      //背景装饰图片数组
       bgNodeArr : {
         default: [],
         type: [cc.Node]
+      },
+      //水波纹
+      waterRippleNode : {
+        default: null,
+        type: cc.Node
       }
     },
 
     onLoad () {
-       
-        
+      this.waterRippleTime = 0;
+      //水波纹播放间隔时间
+      this.intervalTime = 300 + Math.random() * 600;
     },
 
     start () {
-
+     
     },
 
     update (dt) {
+      this.waterRippleTime ++;
+      if(this.waterRippleTime >= this.intervalTime){
+        this.playWaterRipple();
+        this.waterRippleTime = 0;
+        this.intervalTime = 300 + Math.random() * 600;
+      }
+    },
 
+    //水波纹动画播放
+    playWaterRipple(){
+      this.waterRippleNode.active = true;
+      var x_random = Math.random() * 720 - 360;
+      var y_random = Math.random() * 1280 - 640;
+      this.waterRippleNode.setPosition(cc.v2(x_random,y_random));
+      // this.waterRippleNode.x = x_random;
+      // this.waterRippleNode.y = y_random;
+      cc.log(x_random,y_random);
+
+      this.waterRippleNode.getComponent(cc.Animation).play("waterRipple");
     },
 
     //背景装饰的显示
