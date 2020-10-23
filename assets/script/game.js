@@ -9,6 +9,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+      //背景
       bg : {
         default: null,
         type: cc.Sprite
@@ -27,13 +28,20 @@ cc.Class({
       waterRippleNode : {
         default: null,
         type: cc.Node
-      }
+      },
+      //金鱼
+      fishNode : {
+        default: null,
+        type: cc.Node
+      },
     },
 
     onLoad () {
       this.waterRippleTime = 0;
       //水波纹播放间隔时间
       this.intervalTime = 300 + Math.random() * 600;
+
+     this.fishShowRandom();
     },
 
     start () {
@@ -49,7 +57,24 @@ cc.Class({
       }
     },
 
-    //水波纹动画播放
+    /**金鱼随机生成 */
+    fishShowRandom(){
+      //金鱼生成位置的随机
+      this.fishNode
+       //金鱼颜色随机
+       var fishRandom = Math.floor(Math.random() * 3);
+       var children = this.fishNode.children;
+       children[fishRandom].active = true;
+
+       //金鱼的移动
+       var act = cc.moveTo(2,cc.v2(400,-400));
+       this.fishNode.rotation = Math.atan((-400-this.fishNode.y)/(400-this.fishNode.x))/(Math.PI/180) + 180;
+       cc.log(this.fishNode.rotation);
+       this.fishNode.runAction(act);
+    },
+
+
+    /**水波纹动画播放 */
     playWaterRipple(){
       this.waterRippleNode.active = true;
       var x_random = Math.random() * 720 - 360;
@@ -62,7 +87,7 @@ cc.Class({
       this.waterRippleNode.getComponent(cc.Animation).play("waterRipple");
     },
 
-    //背景装饰的显示
+    /**背景装饰的显示 */
     bgBeautifyShow(num){
       for(let i=0;i<this.bgNodeArr.length;i++){
         this.bgNodeArr[i].active = false;
@@ -70,7 +95,7 @@ cc.Class({
       this.bgNodeArr[num].active = true;
     },
 
-    //按钮回调函数
+    /**按钮回调函数 */
     btnCallBack(sender,str){
       switch(str){
         case "start":

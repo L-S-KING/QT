@@ -183,7 +183,7 @@
       "array": [
         0,
         0,
-        508.56366057704156,
+        508.18369636910944,
         0,
         0,
         0,
@@ -1389,7 +1389,7 @@
         "__id__": 34
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 36
@@ -7940,6 +7940,9 @@
     ],
     "waterRippleNode": {
       "__id__": 37
+    },
+    "fishNode": {
+      "__id__": 6
     },
     "_id": "57EkuvQZBMnb8jr2Kx9uw/"
   },
