@@ -42,6 +42,9 @@ cc.Class({
       this.intervalTime = 300 + Math.random() * 600;
 
      this.fishShowRandom();
+
+     //金鱼起始位置
+     this.posBegin = cc.v2(0,0);
     },
 
     start () {
@@ -55,22 +58,60 @@ cc.Class({
         this.waterRippleTime = 0;
         this.intervalTime = 300 + Math.random() * 600;
       }
+      //金鱼每次结束移动的位置
+      this.posEnd = this.fishNode.getPosition();
+      var fishAngle = this.getTanAngle(this.posBegin,this.posEnd);
+      // cc.log("角度" + fishAngle);
+      this.fishNode.rotation = fishAngle;
+      this.posBegin = this.posEnd;
     },
 
     /**金鱼随机生成 */
     fishShowRandom(){
       //金鱼生成位置的随机
-      this.fishNode
-       //金鱼颜色随机
-       var fishRandom = Math.floor(Math.random() * 3);
-       var children = this.fishNode.children;
-       children[fishRandom].active = true;
+      //金鱼颜色随机
+      var fishRandom = Math.floor(Math.random() * 3);
+      var children = this.fishNode.children;
+      for(let i=0;i<children.length;i++){
+        children[i].active = false;
+      }
+      children[fishRandom].active = true;
 
-       //金鱼的移动
-       var act = cc.moveTo(2,cc.v2(400,-400));
-       this.fishNode.rotation = Math.atan((-400-this.fishNode.y)/(400-this.fishNode.x))/(Math.PI/180) + 180;
-       cc.log(this.fishNode.rotation);
-       this.fishNode.runAction(act);
+      // var fish = children[fishRandom].children;
+      // for(let i=0;i<fish.length;i++){
+      //   fish[i].rotation = this.getAngle(0,);
+      //   cc.log(fish[i].rotation);
+      // }
+
+      //金鱼的移动
+      var act = cc.moveTo(2,cc.v2(-400,0));
+      this.fishNode.runAction(act);
+    },
+
+    getTanDeg(tan) {
+      var result = Math.atan(tan) / (Math.PI / 180);
+      result = Math.round(result);
+      return result;
+    },
+
+    getTanAngle(start,end){
+      var x = end.x - start.x;
+      var y = end.y - start.y;
+
+      var tan = y/x;
+      //求出弧度
+      var radian = Math.atan(tan);
+
+      //用弧度算出角度
+      var angle = 180/(Math.PI/radian);
+      if(y > 0 && x == 0){}
+      if(y > 0 ){
+        angle = angle;
+      }
+      else{
+        angle = angle + 180;
+      }
+      return angle;
     },
 
 
